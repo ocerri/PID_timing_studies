@@ -1,0 +1,3 @@
+double Lumi_Nbkg = 1.23e+04; //[pb-1]
+double Nevs_bkg_HT[] = {2.24e+05, 7.64e+03};
+double Mstar_bkg_HT[] = {67.0, 22.9};

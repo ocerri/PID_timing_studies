@@ -1,0 +1,5 @@
+R-Had non vengono riconosciti come particelle stabili anche quando lo sono
+
+I vertex index 3D e 4D si sovrascrivono
+
+I vertex 4D e' logicamente bacato perche usa l'informazione t_i che pero non e' dosponibile a quel livello!

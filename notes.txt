@@ -1,0 +1,8 @@
+Da dove e' preso il tempo 0 di pythia?
+
+In the fill of vertex finder user l'inters lunghezza invece che solo z per calcolare t_CA
+
+python -i src/extract_flat_track_tree.py $PWD/_root/gg2Rhad_PU0.root
+T->Draw("L*(sqrt(1+(M_gen/P_gen)*(M_gen/P_gen)) - sqrt(1+(M_reco/P_reco)*(M_reco/P_reco)))/0.299>>h1(100,-200,500)","","norm same")
+
+https://root.cern.ch/doc/v608/AsymptoticCalculator_8cxx_source.html

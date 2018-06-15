@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#Pythia to Delphes example
+cd $Delphes
+./DelphesHepMC $main_dir/Generation/delphes/cards/delphes_card_CMS.tcl $main_dir/_root/HZ_H2inv_Z2lep.root $main_dir/_hepmc/HZ_H2inv_Z2lep.hepmc
+cd -
+
+#Event display example
+root -l examples/EventDisplay.C'("cards/delphes_card_CMS.tcl","delphes_output.root")'

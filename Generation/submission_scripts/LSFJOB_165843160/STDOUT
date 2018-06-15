@@ -1,0 +1,12 @@
+@(#)CERN job starter $Date: 2010/06/23 14:22:16 $
+Working directory is </pool/lsf/ocerri/165843160> on <p01001532233337.cern.ch>
+
+/pool/lsf/ocerri/165843160
+
+Job finished at Thu May 10 21:43:16 CEST 2018 on node 
+ under linux version Scientific Linux CERN SLC release 6.9 (Carbon)
+
+CERN statistics: This process used approximately : 0:00:02 KSI2K hours (2 KSI2K seconds)
+                 This process corresponds to     : 0:00:09 HS06  hours (9 HS06  seconds)
+
+CERN report: Job Killed. See mail from LSF for messages and native time cpu usage.

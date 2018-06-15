@@ -1,0 +1,4 @@
+gen_hepmc.exe cards/HZ_H2inv_Z2lep.pythia $main_dir/_hepmc/HZ_H2inv_Z2lep.hepmc
+
+
+more ./*.log | grep " | sum                                                |" >> xsec.txt

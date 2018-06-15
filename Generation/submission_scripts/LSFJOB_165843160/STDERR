@@ -1,0 +1,21 @@
+'import site' failed; use -v for traceback
+Traceback (most recent call last):
+  File "/cvmfs/sft.cern.ch/lcg/releases/LCG_88/lcgenv/1.3.3/x86_64-centos7-gcc62-dbg/lcgenv", line 11, in <module>
+    import os
+ImportError: No module named os
+'import site' failed; use -v for traceback
+Traceback (most recent call last):
+  File "/cvmfs/sft.cern.ch/lcg/releases/LCG_88/lcgenv/1.3.3/x86_64-centos7-gcc62-dbg/lcgenv", line 11, in <module>
+    import os
+ImportError: No module named os
+'import site' failed; use -v for traceback
+Traceback (most recent call last):
+  File "/cvmfs/sft.cern.ch/lcg/releases/LCG_88/lcgenv/1.3.3/x86_64-centos7-gcc62-dbg/lcgenv", line 11, in <module>
+    import os
+ImportError: No module named os
+'import site' failed; use -v for traceback
+Traceback (most recent call last):
+  File "/cvmfs/sft.cern.ch/lcg/releases/LCG_88/lcgenv/1.3.3/x86_64-centos7-gcc62-dbg/lcgenv", line 11, in <module>
+    import os
+ImportError: No module named os
+/afs/cern.ch/user/o/ocerri/cernbox/PID_timing_studies/bin/setup_lxp.sh: line 19: .: DelphesEnv.sh: file not found

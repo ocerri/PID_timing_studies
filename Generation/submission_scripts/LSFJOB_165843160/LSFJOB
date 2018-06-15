@@ -1,0 +1,13 @@
+#! /bin/sh
+
+$LSB_TRAPSIGS
+$LSB_RCP1
+$LSB_RCP2
+$LSB_RCP3
+# LSBATCH: User input
+/usr/local/lsf/etc/job_starter '/afs/cern.ch/user/o/ocerri/cernbox/PID_timing_studies/Generation/submission_scripts/submitDelphesJob.sh CMS_PhaseII_trackNtime_lightTree.tcl pp2stopantistop_RHad.pythia 0. -1 5000 5 /afs/cern.ch/user/o/ocerri/cernbox/PID_timing_studies/_root/jobs_PU140_poiss/pp2HardQCD_PU140_M100/pp2HardQCD_PU140_M100_5 100'
+ExitStat=$?
+wait
+# LSBATCH: End user input
+true
+exit `expr $? "|" $ExitStat`

@@ -1,0 +1,55 @@
+pp2HardQCD_PU140_pTHat100-150_4437k
+XSec = 1.2e+09 +/- 6.9e+05 fb
+Events gen = 4437k
+Passed: 1
+Weight: 281.4
+
+
+pp2HardQCD_PU140_pTHat150-185_2865k
+XSec = 1.6e+08 +/- 1.3e+05 fb
+Events gen = 2865k
+Passed: 2
+Weight: 110.9
+
+
+pp2HardQCD_PU140_pTHat185-300_4255k
+XSec = 9.1e+07 +/- 5.2e+04 fb
+Events gen = 4255k
+Passed: 26
+Weight: 557.1
+
+
+pp2HardQCD_PU140_pTHat300-600_4285k
+XSec = 1.0e+07 +/- 6.1e+03 fb
+Events gen = 4285k
+Passed: 328
+Weight: 780.7
+
+
+pp2HardQCD_PU140_pTHat600-INF_510k
+XSec = 2.9e+05 +/- 2.0e+02 fb
+Events gen = 510k
+Passed: 237
+Weight: 135.7
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/bkg_summary.png has been created
+ FCN=0.0666586 FROM MIGRAD    STATUS=CONVERGED     636 CALLS         637 TOTAL
+                     EDM=7.19479e-07    STRATEGY= 1      ERROR MATRIX ACCURATE
+  EXT PARAMETER                                   STEP         FIRST
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE
+   1  p0           3.15386e+06   3.84491e+07   2.12915e+00  -2.66825e-10
+   2  p1           3.95826e+00   2.86817e+00   1.22226e-04   3.52773e-03
+                               ERR DEF= 0.5
+Normalized bkg fit parameters 314076.630486 3.958262317
+M* =  0.252636111484
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/bkg_sum.png has been created
+p_T(Hat)    N_exp
+125.0    2.81e+05
+167.5    1.11e+05
+242.5    5.57e+05
+450.0    7.81e+05
+900.0    1.36e+05
+Tot bkg evt @1000 fb-1 = 1.87e+06
+Tot bkg evt @300 fb-1 = 5.60e+05
+Tot bkg evt @12 fb-1 = 2.24e+04

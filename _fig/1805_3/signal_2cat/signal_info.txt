@@ -1,0 +1,139 @@
+pp2RHad_PU140_M100_45k
+Tracks =  777.0
+Events gen =  45000.0
+eff = 0.0173
+
+
+pp2RHad_PU140_M1000_40k
+Tracks =  8811.0
+Events gen =  40000.0
+eff = 0.2203
+
+
+pp2RHad_PU140_M1250_50k
+Tracks =  11460.0
+Events gen =  50000.0
+eff = 0.2292
+
+
+pp2RHad_PU140_M1500_50k
+Tracks =  11519.0
+Events gen =  50000.0
+eff = 0.2304
+
+
+pp2RHad_PU140_M200_50k
+Tracks =  3814.0
+Events gen =  50000.0
+eff = 0.0763
+
+
+pp2RHad_PU140_M2000_45k
+Tracks =  10633.0
+Events gen =  45000.0
+eff = 0.2363
+
+
+pp2RHad_PU140_M350_45k
+Tracks =  6477.0
+Events gen =  45000.0
+eff = 0.1439
+
+
+pp2RHad_PU140_M50_45k
+Tracks =  50.0
+Events gen =  45000.0
+eff = 0.0011
+
+
+pp2RHad_PU140_M500_50k
+Tracks =  8778.0
+Events gen =  50000.0
+eff = 0.1756
+
+
+pp2RHad_PU140_M750_50k
+Tracks =  10244.0
+Events gen =  50000.0
+eff = 0.2049
+
+
+Masses: [  50.  100.  200.  350.  500.  750. 1000. 1250. 1500. 2000.]
+Eff: [0.00111111 0.01726667 0.07628    0.14393333 0.17556    0.20488
+ 0.220275   0.2292     0.23038    0.23628889]
+>>> ^D
+Vrael:PID_timing_studies olmo$ python -i script_analysis/SelectionCutsAndModeling_2cat.py _root/jobs_PU140_poiss/pp2RHad_PU140_M*/*evt*
+10
+pp2RHad_PU140_M100_45k
+Tracks =  777.0
+Events gen =  45000.0
+eff = 0.0173
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M100_45k.png has been created
+pp2RHad_PU140_M1000_40k
+Tracks =  8811.0
+Events gen =  40000.0
+eff = 0.2203
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M1000_40k.png has been created
+pp2RHad_PU140_M1250_50k
+Tracks =  11460.0
+Events gen =  50000.0
+eff = 0.2292
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M1250_50k.png has been created
+pp2RHad_PU140_M1500_50k
+Tracks =  11519.0
+Events gen =  50000.0
+eff = 0.2304
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M1500_50k.png has been created
+pp2RHad_PU140_M200_50k
+Tracks =  3814.0
+Events gen =  50000.0
+eff = 0.0763
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M200_50k.png has been created
+pp2RHad_PU140_M2000_45k
+Tracks =  10633.0
+Events gen =  45000.0
+eff = 0.2363
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M2000_45k.png has been created
+pp2RHad_PU140_M350_45k
+Tracks =  6477.0
+Events gen =  45000.0
+eff = 0.1439
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M350_45k.png has been created
+pp2RHad_PU140_M50_45k
+Tracks =  50.0
+Events gen =  45000.0
+eff = 0.0011
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M50_45k.png has been created
+pp2RHad_PU140_M500_50k
+Tracks =  8778.0
+Events gen =  50000.0
+eff = 0.1756
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M500_50k.png has been created
+pp2RHad_PU140_M750_50k
+Tracks =  10244.0
+Events gen =  50000.0
+eff = 0.2049
+
+
+Info in <TCanvas::Print>: file /Users/olmo/Desktop/SelectionCutsAndModeling_2catpp2RHad_PU140_M750_50k.png has been created
+Masses: [  50.  100.  200.  350.  500.  750. 1000. 1250. 1500. 2000.]
+Eff: [0.00111111 0.01726667 0.07628    0.14393333 0.17556    0.20488
+ 0.220275   0.2292     0.23038    0.23628889]
