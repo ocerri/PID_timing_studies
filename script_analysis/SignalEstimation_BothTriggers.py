@@ -112,59 +112,60 @@ for i, m in enumerate(stopmass):
     h_mass_cat1.Scale(1./h_mass_cat1.Integral())
     q = np.zeros(2)
     h_mass_cat1.GetQuantiles(2, q, np.array([0.02, 0.98]))
-    f_fit = rt.TF1('f_fit1_'+l, TF_gausDE, q[0] , q[1])
+    f_fit1 = rt.TF1('f_fit1_'+l, TF_gausDE, q[0] , q[1])
+    f_fit1.SetParNames('K', '#alpha_{L}', '#alpha_{R}' , '#mu', '#sigma')
 
     integral = h_mass_cat1.Integral()*h_mass_cat1.GetBinWidth(1)
     # print integral
     # integral /= np.sqrt(2*np.pi)*h_mass_cat1.GetRMS()
-    f_fit.SetParameter(0, 0.15) #Norm
-    f_fit.SetParLimits(0,1e-3, 50)
-    # f_fit.FixParameter(0, 0.15) #Norm
+    f_fit1.SetParameter(0, 0.15) #Norm
+    f_fit1.SetParLimits(0,1e-3, 50)
+    # f_fit1.FixParameter(0, 0.15) #Norm
 
-    f_fit.SetParameter(1, 1.5) #left alpha
-    f_fit.SetParLimits(1, 0.5, 5)
-    # f_fit.FixParameter(1, 1.5) #left alpha
+    f_fit1.SetParameter(1, 1.5) #left alpha
+    f_fit1.SetParLimits(1, 0.5, 5)
+    # f_fit1.FixParameter(1, 1.5) #left alpha
 
-    f_fit.SetParameter(2, 1.5) #right alpha
-    f_fit.SetParLimits(2, 0.5, 5)
-    # f_fit.FixParameter(2, 1.5) #right alpha
+    f_fit1.SetParameter(2, 1.5) #right alpha
+    f_fit1.SetParLimits(2, 0.5, 5)
+    # f_fit1.FixParameter(2, 1.5) #right alpha
 
-    f_fit.SetParameter(3,h_mass_cat1.GetMean()) #mean
-    f_fit.SetParLimits(3,binning_mass[1], binning_mass[2])
-    # f_fit.FixParameter(3,h_mass_cat1.GetMean()) #mean
+    f_fit1.SetParameter(3,h_mass_cat1.GetMean()) #mean
+    f_fit1.SetParLimits(3,binning_mass[1], binning_mass[2])
+    # f_fit1.FixParameter(3,h_mass_cat1.GetMean()) #mean
 
-    f_fit.SetParameter(4, h_mass_cat1.GetRMS()*0.7) #sigma
-    f_fit.SetParLimits(4, 1, 1000)
-    # f_fit.FixParameter(4, h_mass_cat1.GetRMS()*0.7) #right alpha
+    f_fit1.SetParameter(4, h_mass_cat1.GetRMS()*0.7) #sigma
+    f_fit1.SetParLimits(4, 1, 1000)
+    # f_fit1.FixParameter(4, h_mass_cat1.GetRMS()*0.7) #right alpha
 
-    # print 'Integral:', f_fit.Integral(binning_mass[0], binning_mass[1])
+    # print 'Integral:', f_fit1.Integral(binning_mass[0], binning_mass[1])
 
-    fit_results = h_mass_cat1.Fit(f_fit, 'IL0SQR+')
+    fit_results = h_mass_cat1.Fit(f_fit1, 'IL0SQR+')
 
     pars[1].append([m,
-                 float(f_fit.GetParameter(1)),
-                 float(f_fit.GetParError(1)),
-                 float(f_fit.GetParameter(2)),
-                 float(f_fit.GetParError(2)),
-                 float(f_fit.GetParameter(3)),
-                 float(f_fit.GetParError(3)),
-                 float(f_fit.GetParameter(4)),
-                 float(f_fit.GetParError(4)),
+                 float(f_fit1.GetParameter(1)),
+                 float(f_fit1.GetParError(1)),
+                 float(f_fit1.GetParameter(2)),
+                 float(f_fit1.GetParError(2)),
+                 float(f_fit1.GetParameter(3)),
+                 float(f_fit1.GetParError(3)),
+                 float(f_fit1.GetParameter(4)),
+                 float(f_fit1.GetParError(4)),
                  fit_results.Chi2(),
                  int(fit_results.Ndf()),
                  eff1,
                  eff1_err
                  ])
 
-    donotdelete.append(f_fit)
-    f_fit.SetLineColor(2)
-    f_fit.SetLineWidth(2)
-    f_fit.SetLineStyle(9)
+    donotdelete.append(f_fit1)
+    f_fit1.SetLineColor(2)
+    f_fit1.SetLineWidth(2)
+    f_fit1.SetLineStyle(9)
     c_out.cd(2)
     h_mass_cat1.SetXTitle('m_{h} [GeV]')
     h_mass_cat1.SetYTitle('Prob. / {:.1f} GeV'.format(h_mass_cat1.GetBinWidth(1)))
     h_mass_cat1.Draw()
-    f_fit.Draw("SAME")
+    f_fit1.Draw("SAME")
     # rt.gPad.SetLogy()
 
     # ----------------- Category #2 --------------------------------------------
@@ -183,6 +184,7 @@ for i, m in enumerate(stopmass):
     q = np.zeros(2)
     h_mass_cat2.GetQuantiles(2, q, np.array([0.03, 0.98]))
     f_fit = rt.TF1('f_fit1_'+l, TF_gausDE, q[0] , q[1])
+    f_fit.SetParNames('K', '#alpha_{L}', '#alpha_{R}' , '#mu', '#sigma')
 
     integral = h_mass_cat2.Integral()*h_mass_cat2.GetBinWidth(1)
     integral /= np.sqrt(2*np.pi)*h_mass_cat2.GetRMS()
@@ -235,6 +237,19 @@ for i, m in enumerate(stopmass):
     c_out.Update()
     donotdelete.append([c_out, h_dm_pth, h_mass_cat1, h_mass_cat2])
     c_out.SaveAs(save_dir + '/RHad_mass{}_spectrum.png'.format(m))
+
+    if m == 500:
+        print m
+        c_out2 = rt.TCanvas('c_out2_'+l, 'c_out2_'+l, 1200, 600)
+        c_out2.Divide(2, 1)
+        c_out2.cd(1)
+        h_mass_cat1.Draw()
+        f_fit1.Draw("SAME")
+        c_out2.cd(2)
+        h_mass_cat2.Draw()
+        f_fit.Draw("SAME")
+        c_out2.SaveAs(save_dir + '/RHad_mass{}_spectrum.root'.format(m))
+
 
 
 pars[1] = np.array(pars[1])
@@ -333,4 +348,4 @@ leg.AddEntry(g_e2, 'Cat 2', 'lep')
 leg.Draw()
 
 c.Update()
-c.SaveAs(save_dir + '/SigmaEff.png')
+c.SaveAs(save_dir + '/SigmaEff.root')

@@ -89,10 +89,10 @@ void Set_GausDoubleExpPdf_pars(RooWorkspace* w, double mass, bool TOFtrigger = f
     g2_aR = new TGraph(M_st.size(), &M_st[0], aR_TOF2);
   }
 
-  w->var("mu_1")->setVal(g2_mu->Eval(mass));
-  w->var("sigma_1")->setVal(g2_sigma->Eval(mass));
-  w->var("aL_1")->setVal(g2_aL->Eval(mass));
-  w->var("aR_1")->setVal(g2_aR->Eval(mass));
+  w->var("mu_2")->setVal(g2_mu->Eval(mass));
+  w->var("sigma_2")->setVal(g2_sigma->Eval(mass));
+  w->var("aL_2")->setVal(g2_aL->Eval(mass));
+  w->var("aR_2")->setVal(g2_aR->Eval(mass));
 
   w->var("mu_2")->setConstant(true);
   w->var("sigma_2")->setConstant(true);
@@ -131,8 +131,7 @@ void Set_effL(RooWorkspace* w, double lumi, double mass, bool TOFtrigger = false
 }
 
 TCanvas* DrawExampleMassSpectrum(RooWorkspace* w, double lumi, double xsec_injected = 0, TString label = "") {
-
-  w->Print();
+  // w->Print();
 
   RooRealVar * m = w->var("Mass");  // the observable
   RooCategory * index = w->cat("index");
@@ -212,7 +211,7 @@ TCanvas* DrawExampleMassSpectrum(RooWorkspace* w, double lumi, double xsec_injec
 
 RooWorkspace* ModelTOFAnalysis_RHad(double lumi, double xsec_data = 0, bool TOFtrigger = false) //lumi [pb]
 {
-  double binning[] = {345, 50, 3500};
+  double binning[] = {1150, 50, 3500};
 
   RooWorkspace* w = new RooWorkspace("w");
   w->addClassDeclImportDir("/Users/olmo/cernbox/PID_timing_studies/script_analysis");
@@ -225,15 +224,15 @@ RooWorkspace* ModelTOFAnalysis_RHad(double lumi, double xsec_data = 0, bool TOFt
   w->var("gamma")->setConstant(true);
   w->var("mu_Gamma")->setConstant(true);
   w->factory(Form("GausDoubleExp:sig_pdf_1(Mass, mu_1[200., 10, 4000], sigma_1[30., 1., 3000], aL_1[2, 0.1, 3], aR_1[1.5, 0.1, 3])"));
-  w->factory("prod:nsig_1(xsec[1., 0, 2e3], effL_1[12e2])");
-  w->factory("SUM:model_1(nsig_1*sig_pdf_1, nbkg_1[1e6, 1e4, 5e7]*bkg_pdf_1)");
+  w->factory("prod:nsig_1(xsec[1., 1e-5, 2e3], effL_1[12e2])");
+  w->factory("SUM:model_1(nsig_1*sig_pdf_1, nbkg_1[1e6, 1e5, 5e7]*bkg_pdf_1)");
   w->factory("PROD:model_bkg_1(nbkg_1, bkg_pdf_1)");
 
   // Create model for 2 particle category
   double l_aux = TOFtrigger?Mstar_bkg_TOF[1]:Mstar_bkg_HT[1];
   l_aux = -1./l_aux;
   w->factory(Form("Exponential:bkg_pdf_2(Mass, lambda_2[%f, -5, -0.001])", l_aux));
-  // w->factory(Form("Gamma:bkg_pdf_2(Mass[%f,%f], gamma_2[1.e-6, 1.e-6, 1.e-6], lambda_2[%f, 10, 50], mu_Gamma2[0., 0., 0.])",binning[1], binning[2], TOFtrigger?Mstar_bkg_TOF[1]:Mstar_bkg_HT[1]));
+  // w->factory(Form("Gamma:bkg_pdf_2(Mass, gamma_2[1.e-6, 1.e-6, 1.e-6], lambda_2[%f, 10, 50], mu_Gamma2[0., 0., 0.])", TOFtrigger?Mstar_bkg_TOF[1]:Mstar_bkg_HT[1]));
   // w->var("gamma_2")->setConstant(true);
   // w->var("mu_Gamma2")->setConstant(true);
 
@@ -337,22 +336,13 @@ TCanvas* MakeBrazilPlot(vector<double> RHad_mass_list, map<int, vector<double>> 
 
   auto c_mass = new TCanvas("c_mass", "c_mass", 800, 600);
   gr_2s->SetTitle("");
-  // gr_2s->SetFillColor(5);
-  gr_2s->SetFillColorAlpha(kYellow, 0.8);
+  gr_2s->SetFillColor(5);
+  // gr_2s->SetFillColorAlpha(kYellow);//, 0.8);
   gr_2s->SetFillStyle(1001);
   gr_2s->Draw("A3");
-  gr_2s->GetXaxis()->SetTitle("#tilde{t}_{1} mass [GeV]");
-  gr_2s->GetYaxis()->SetTitle("Excluded xsec @95% CLs [fb]");
-  gr_2s->GetYaxis()->SetRangeUser(5e-4, 1e3);
-  gr_2s->GetYaxis()->SetTitleSize(.05);
-	gr_2s->GetYaxis()->SetTitleOffset(1.25);
-	gr_2s->GetYaxis()->SetLabelSize(.05);
-  gr_2s->GetXaxis()->SetTitleSize(.05);
-	gr_2s->GetXaxis()->SetTitleOffset(1.2);
-	gr_2s->GetXaxis()->SetLabelSize(.05);
 
-  // gr_1s->SetFillColor(8);
-  gr_1s->SetFillColorAlpha(kGreen, 0.7);
+  gr_1s->SetFillColor(8);
+  // gr_1s->SetFillColorAlpha(kGreen);//, 0.7);
   gr_1s->SetFillStyle(1001);
   gr_1s->Draw("3");
 
@@ -419,19 +409,28 @@ TCanvas* MakeBrazilPlot(vector<double> RHad_mass_list, map<int, vector<double>> 
 
   c_mass->SetGrid();
   c_mass->SetLogy();
-  // c_mass->SetLogx();
+  c_mass->SetLogx();
+  gr_2s->GetXaxis()->SetTitle("#tilde{t}_{1} mass [GeV]");
+  gr_2s->GetYaxis()->SetTitle("Excluded xsec @95% CLs [fb]");
+  gr_2s->GetYaxis()->SetRangeUser(5e-4, 1e4);
+  gr_2s->GetYaxis()->SetTitleSize(.05);
+  gr_2s->GetYaxis()->SetTitleOffset(1.25);
+  gr_2s->GetYaxis()->SetLabelSize(.05);
+  gr_2s->GetXaxis()->SetTitleSize(.05);
+  gr_2s->GetXaxis()->SetTitleOffset(1.2);
+  gr_2s->GetXaxis()->SetLabelSize(.05);
   gPad->SetLeftMargin(.13);
 	gPad->SetRightMargin(.05);
   gPad->SetBottomMargin(.14);
 	gPad->SetTopMargin(.05);
-
+  c_mass->Update();
   return c_mass;
 }
 
 map<int, vector<double>> Compute_limit_band(vector<double> masses_scan, double Luminosity = 12, bool TOFtrigger = false){
   cout << "Building the model" << endl;
-  // auto w_sig = ModelTOFAnalysis_RHad(Luminosity, test_xsec);
-  // DrawExampleMassSpectrum(w_sig, Luminosity, test_mass);
+  auto w_sig = ModelTOFAnalysis_RHad(Luminosity, test_xsec);
+  DrawExampleMassSpectrum(w_sig, Luminosity, test_xsec, Form("M%.0f_L%.0f", test_mass, Luminosity));
 
   auto w_bkg = ModelTOFAnalysis_RHad(Luminosity, 0, TOFtrigger);
   DrawExampleMassSpectrum(w_bkg, Luminosity, 0, Form("bkg_L%.0f", Luminosity));
@@ -446,10 +445,10 @@ map<int, vector<double>> Compute_limit_band(vector<double> masses_scan, double L
 
 
   float points[4][9] = {
-    {100, 150,  200,  300,  500,  600, 1000, 6000},
-    {150,  70,   50,   25,   14,    7,    2,    2},
-    { 30,  10,    4,   2,    1,   0.5, 0.05, 0.03},
-    { 1,    2,    2,   2,    1,   0.5, 0.05, 0.03},
+    {100, 150,  200,  300,  500,   600,  1000,   6000},
+    {500,  90,   35,   10,    6,     4,     2,      2},
+    { 60,   8,    2,  0.3, 0.04,  0.05, 0.022, 0.01},
+    { 10,   5,  1.6,  0.3, 0.04,  0.05, 0.025, 0.01},
   };
 
   TGraph *gr_max_xsec;
@@ -471,8 +470,8 @@ map<int, vector<double>> Compute_limit_band(vector<double> masses_scan, double L
 
     HypoTestInverterResult * r = calc.RunInverter(w_bkg, "ModelSBConfig", "ModelBConfig",
                                                   "data", 2, 3, true,
-                                                  50, 0., max_xsec,
-                                                  1000);
+                                                  50, 0, max_xsec,
+                                                  100);
 
     calc.AnalyzeResult( r, 2, 3, true, 50, "/Users/olmo/cernbox/PID_timing_studies/_root/results/", Form("_L%.0ffb_%s_M%.0f", Luminosity, TOFtrigger?"TOF":"HT", mass));
 
@@ -487,18 +486,19 @@ map<int, vector<double>> Compute_limit_band(vector<double> masses_scan, double L
 void TOFAnalysis_RHad_catCombined(){
   RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
 
-  // vector<double> masses_scan = {200};
-  vector<double> masses_scan = {100, 150, 200, 300, 400, 600, 800, 1000, 1200, 1600, 2000, 2500};
+  vector<double> masses_scan = {200};
+  // vector<double> masses_scan = {100, 150, 200, 300, 400, 600, 800, 1000, 1200, 1600, 2000, 2500};
   // vector<double> masses_scan_low = {200};
-  vector<double> masses_scan_low = {100, 150, 200, 300, 400, 600, 800, 1000};
+  // vector<double> masses_scan_low = {100, 150, 200, 300, 400, 600, 800, 1000};
 
   auto exp_upper_limit_now = Compute_limit_band(masses_scan, 12, false);
-  auto exp_upper_limit_HL = Compute_limit_band(masses_scan, 1e3, false);
+  // auto exp_upper_limit_HL = Compute_limit_band(masses_scan, 1e3, false);
 
-  auto exp_upper_limit_HL_TOFtrigger = Compute_limit_band(masses_scan_low, 1e3, true);
+  // auto exp_upper_limit_HL_TOFtrigger = Compute_limit_band(masses_scan_low, 1e3, true);
 
 
-  auto c_mass = MakeBrazilPlot(masses_scan, exp_upper_limit_now, exp_upper_limit_HL, exp_upper_limit_HL_TOFtrigger);
-  c_mass->SaveAs("~/_fig/ExclusionLimits.root");
+  // auto c_mass = MakeBrazilPlot(masses_scan, exp_upper_limit_now, exp_upper_limit_HL, exp_upper_limit_HL_TOFtrigger);
+  // c_mass->SaveAs("./_fig/ExclusionLimits.root");
+  // c_mass->SaveAs("./_fig/ExclusionLimits.png");
 
 }

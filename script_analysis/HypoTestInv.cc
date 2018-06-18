@@ -75,7 +75,7 @@ struct HypoTestInvOptions {
   TString resultFileName;                  // file with results (by default is built automatically using the workspace input file name)
   bool optimize = true;                    // optimize evaluation of test statistic
   bool useVectorStore = true;              // convert data to use new roofit data store
-  bool generateBinned = false;             // generate binned data sets
+  bool generateBinned = true;             // generate binned data sets
   bool noSystematics = false;              // force all systematics to be off (i.e. set all nuisance parameters as constat
                                            // to their nominal values)
   double nToysRatio = 2;                   // ratio Ntoys S+b/ntoysB
@@ -83,8 +83,8 @@ struct HypoTestInvOptions {
   bool useProof = false;                   // use Proof Lite when using toys (for freq or hybrid)
   int nworkers = 0;                        // number of worker for ProofLite (default use all available cores)
   bool enableDetailedOutput = true;       // enable detailed output with all fit information for each toys (output will be written in result file)
-  int initialFit = -1;                     // do a first  fit to the model (-1 : default, 0 skip fit, 1 do always fit)
-  int randomSeed = -1;                     // random seed (if = -1: use default value, if = 0 always random )
+  int initialFit = 1;                     // do a first  fit to the model (-1 : default, 0 skip fit, 1 do always fit)
+  int randomSeed = 0;                     // random seed (if = -1: use default value, if = 0 always random )
                                            // NOTE: Proof uses automatically a random seed
 
   int nAsimovBins = 0;                     // number of bins in observables used for Asimov data sets (0 is the default and it is given by workspace, typically is 100)
