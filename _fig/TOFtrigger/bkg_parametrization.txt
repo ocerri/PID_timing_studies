@@ -1,3 +1,4 @@
 double Lumi_Nbkg = 1.23e+04; //[pb-1]
 double Nevs_bkg_TOF[] = {4.47e+05, 2.00e+04};
 double Mstar_bkg_TOF[] = {66.6, 24.9};
+double DMstar_bkg_TOF[] = {7e-09, 5e-07};

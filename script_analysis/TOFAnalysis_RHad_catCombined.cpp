@@ -19,7 +19,7 @@
 
 using namespace RooFit;
 
-double test_mass = 400;
+double test_mass = 500;
 double test_xsec = 100.; //[fb]
 
 double Lumi_Nbkg = 1.23e+01; //[fb-1]
@@ -193,7 +193,7 @@ TCanvas* DrawExampleMassSpectrum(RooWorkspace* w, double lumi, double xsec_injec
   note->SetTextSize(0.04);
   note->SetLineColor(1);
   note->SetLineWidth(1);
-  note->DrawLatexNDC(0.18, 0.85, Form("#splitline{#sqrt{s} 14TeV, L = %.0ffb^{-1}}{M_{#tilde{t}_{1}} = %.0f GeV,  #sigma_{MC} = %.0f fb}", lumi, test_mass, xsec_injected));
+  note->DrawLatexNDC(0.18, 0.85, Form("#splitline{#sqrt{s} = 14TeV, L = %.0ffb^{-1}}{M_{#tilde{t}_{1}} = %.0f GeV,  #sigma_{MC} = %.0f fb}", lumi, test_mass, xsec_injected));
 
 
   c_out->cd(2);
@@ -211,7 +211,8 @@ TCanvas* DrawExampleMassSpectrum(RooWorkspace* w, double lumi, double xsec_injec
 
 RooWorkspace* ModelTOFAnalysis_RHad(double lumi, double xsec_data = 0, bool TOFtrigger = false) //lumi [pb]
 {
-  double binning[] = {1150, 50, 3500};
+  double binning[] = {345, 50, 3500};
+  // double binning[] = {1150, 50, 3500};
 
   RooWorkspace* w = new RooWorkspace("w");
   w->addClassDeclImportDir("/Users/olmo/cernbox/PID_timing_studies/script_analysis");
@@ -486,7 +487,7 @@ map<int, vector<double>> Compute_limit_band(vector<double> masses_scan, double L
 void TOFAnalysis_RHad_catCombined(){
   RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
 
-  vector<double> masses_scan = {200};
+  vector<double> masses_scan = {500};
   // vector<double> masses_scan = {100, 150, 200, 300, 400, 600, 800, 1000, 1200, 1600, 2000, 2500};
   // vector<double> masses_scan_low = {200};
   // vector<double> masses_scan_low = {100, 150, 200, 300, 400, 600, 800, 1000};

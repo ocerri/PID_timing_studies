@@ -348,4 +348,11 @@ leg.AddEntry(g_e2, 'Cat 2', 'lep')
 leg.Draw()
 
 c.Update()
-c.SaveAs(save_dir + '/SigmaEff.root')
+
+f_eff = rt.TFile.Open(save_dir + '/SigmaEff.root', 'RECREATE')
+c.Write()
+g_e1.SetName("g_e1")
+g_e1.Write()
+g_e2.SetName("g_e2")
+g_e2.Write()
+# c.SaveAs(save_dir + '/SigmaEff.root')
