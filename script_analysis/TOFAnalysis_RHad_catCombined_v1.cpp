@@ -1,3 +1,8 @@
+/*
+version with
+min_trk_pt = [100., 50.]
+max_dm = 0.1
+*/
 #include "TCanvas.h"
 #include "TGraphAsymmErrors.h"
 #include "TLatex.h"
@@ -23,33 +28,33 @@ double test_mass = 500;
 double test_xsec = 100.; //[fb]
 
 double Lumi_Nbkg = 1.23e+01; //[fb-1]
-double Nevs_bkg_HT[] = {2.24e+05, 7.64e+03};
-double Mstar_bkg_HT[] = {67.0, 22.9};
-double Nevs_bkg_TOF[] = {4.47e+05, 2.00e+04};
-double Mstar_bkg_TOF[] = {66.6, 24.9};
+double Nevs_bkg_HT[] = {2.27e+05, 2.99e+03};
+double Mstar_bkg_HT[] = {66.7, 23.5};
+double Nevs_bkg_TOF[] = {4.50e+05, 6.00e+03};
+double Mstar_bkg_TOF[] = {66.4, 21.2};
 
 void Set_GausDoubleExpPdf_pars(RooWorkspace* w, double mass, bool TOFtrigger = false) {
   vector<double> M_st = {100.000, 200.000, 350.000, 500.000, 750.000, 1000.000, 1250.000, 1500.000, 2000.000};
 
-  double aL_HT1[] = {0.579, 0.644, 0.780, 0.781, 0.894, 0.724, 0.698, 0.812, 0.850};
-  double aR_HT1[] = {0.500, 0.588, 0.719, 0.669, 0.802, 0.644, 0.572, 0.655, 0.661};
-  double mu_HT1[] = {99.953, 199.664, 349.487, 498.793, 748.687, 996.947, 1242.569, 1493.386, 1983.368};
-  double sigma_HT1[] = {3.487, 6.181, 13.705, 21.230, 41.974, 54.583, 71.972, 108.938, 171.725};
+  double aL_HT1[] = {0.721, 0.671, 0.846, 0.858, 0.990, 0.862, 0.849, 0.881, 0.932};
+  double aR_HT1[] = {0.500, 0.502, 0.676, 0.638, 0.805, 0.737, 0.675, 0.717, 0.769};
+  double mu_HT1[] = {100.589, 200.090, 351.013, 501.222, 753.803, 1006.326, 1255.572, 1509.431, 2012.087};
+  double sigma_HT1[] = {3.925, 6.336, 14.745, 22.872, 45.106, 63.419, 84.332, 116.673, 186.150};
 
-  double aL_HT2[] = {1.029, 0.908, 0.934, 0.897, 0.885, 0.908, 0.992, 0.970, 1.076};
-  double aR_HT2[] = {1.126, 0.980, 0.960, 0.966, 0.958, 1.036, 0.973, 0.954, 1.055};
-  double mu_HT2[] = {100.046, 200.032, 349.727, 499.744, 748.320, 998.664, 1244.701, 1493.342, 1986.155};
-  double sigma_HT2[] = {2.914, 4.730, 9.363, 15.778, 28.561, 46.456, 61.688, 82.566, 131.018};
+  double aL_HT2[] = {2.016, 1.128, 1.103, 1.210, 0.899, 0.924, 0.911, 0.800, 0.763};
+  double aR_HT2[] = {1.667, 1.299, 1.054, 3.987, 1.002, 1.040, 0.946, 0.835, 0.838};
+  double mu_HT2[] = {100.019, 200.057, 349.760, 500.282, 749.039, 999.599, 1245.177, 1495.242, 1993.179};
+  double sigma_HT2[] = {3.006, 4.735, 8.939, 16.340, 24.367, 39.024, 51.150, 64.602, 96.306};
 
-  double aL_TOF1[] = {0.534, 0.510, 0.607, 0.625, 0.683, 0.582, 0.592, 0.672, 0.717};
-  double aR_TOF1[] = {0.551, 0.556, 0.632, 0.600, 0.649, 0.527, 0.501, 0.567, 0.580};
-  double mu_TOF1[] = {100.280, 200.393, 350.002, 498.981, 748.393, 995.516, 1242.172, 1492.932, 1982.999};
-  double sigma_TOF1[] = {2.079, 3.517, 8.761, 14.787, 30.429, 41.554, 59.130, 90.762, 148.094};
+  double aL_TOF1[] = {0.550, 0.522, 0.591, 0.635, 0.731, 0.675, 0.679, 0.777, 0.838};
+  double aR_TOF1[] = {0.501, 0.500, 0.531, 0.513, 0.614, 0.559, 0.540, 0.631, 0.686};
+  double mu_TOF1[] = {100.221, 200.262, 350.002, 499.254, 750.698, 1000.969, 1251.068, 1505.410, 2007.665};
+  double sigma_TOF1[] = {2.126, 3.576, 8.490, 14.851, 32.135, 47.319, 66.058, 101.200, 166.847};
 
-  double aL_TOF2[] = {0.688, 0.806, 0.826, 0.839, 0.854, 0.886, 0.964, 0.941, 1.062};
-  double aR_TOF2[] = {0.789, 0.916, 0.855, 0.905, 0.931, 1.010, 0.950, 0.925, 1.047};
-  double mu_TOF2[] = {100.396, 200.284, 349.787, 499.844, 748.470, 998.663, 1244.760, 1493.372, 1986.291};
-  double sigma_TOF2[] = {1.339, 3.325, 7.686, 14.235, 27.394, 45.285, 60.213, 80.647, 130.084};
+  double aL_TOF2[] = {0.854, 0.996, 0.982, 0.983, 0.869, 0.903, 0.882, 0.736, 0.752};
+  double aR_TOF2[] = {0.964, 1.111, 0.974, 1.188, 0.976, 1.012, 0.918, 0.754, 0.825};
+  double mu_TOF2[] = {100.385, 200.251, 349.810, 500.209, 749.194, 999.583, 1245.293, 1494.638, 1993.190};
+  double sigma_TOF2[] = {1.441, 3.455, 7.571, 13.576, 23.317, 37.865, 49.475, 59.733, 94.822};
 
   TGraph *g_mu, *g_sigma, *g_aL, *g_aR;
   if (!TOFtrigger) {
@@ -106,10 +111,10 @@ void Set_GausDoubleExpPdf_pars(RooWorkspace* w, double mass, bool TOFtrigger = f
 void Set_effL(RooWorkspace* w, double lumi, double mass, bool TOFtrigger = false) {
     vector<double> M_st = {100.000, 200.000, 350.000, 500.000, 750.000, 1000.000, 1250.000, 1500.000, 2000.000};
 
-    double eff_HT1[] = {0.011, 0.061, 0.168, 0.258, 0.359, 0.412, 0.440, 0.463, 0.483};
-    double eff_HT2[] = {0.019, 0.081, 0.145, 0.170, 0.188, 0.193, 0.194, 0.186, 0.181};
-    double eff_TOF1[] = {0.091, 0.242, 0.365, 0.413, 0.452, 0.468, 0.479, 0.490, 0.500};
-    double eff_TOF2[] = {0.090, 0.148, 0.176, 0.185, 0.193, 0.195, 0.196, 0.187, 0.181};
+    double eff_HT1[] = {0.015, 0.072, 0.196, 0.299, 0.419, 0.482, 0.515, 0.537, 0.564};
+    double eff_HT2[] = {0.016, 0.070, 0.117, 0.129, 0.129, 0.123, 0.119, 0.112, 0.100};
+    double eff_TOF1[] = {0.096, 0.255, 0.394, 0.455, 0.511, 0.538, 0.554, 0.564, 0.580};
+    double eff_TOF2[] = {0.083, 0.134, 0.148, 0.143, 0.133, 0.125, 0.120, 0.112, 0.101};
 
 
     TGraph* gr_1 = nullptr;
@@ -211,8 +216,8 @@ TCanvas* DrawExampleMassSpectrum(RooWorkspace* w, double lumi, double xsec_injec
 
 RooWorkspace* ModelTOFAnalysis_RHad(double lumi, double xsec_data = 0, bool TOFtrigger = false) //lumi [pb]
 {
-  double binning[] = {345, 50, 3500};
-  // double binning[] = {1150, 50, 3500};
+  // double binning[] = {345, 50, 3500};
+  double binning[] = {1150, 50, 3500};
 
   RooWorkspace* w = new RooWorkspace("w");
   w->addClassDeclImportDir("/Users/olmo/cernbox/PID_timing_studies/script_analysis");
@@ -474,7 +479,7 @@ map<int, vector<double>> Compute_limit_band(vector<double> masses_scan, double L
                                                   50, 0, max_xsec,
                                                   100);
 
-    calc.AnalyzeResult( r, 2, 3, true, 50, "/Users/olmo/cernbox/PID_timing_studies/_root/results/", Form("_L%.0ffb_%s_M%.0f", Luminosity, TOFtrigger?"TOF":"HT", mass));
+    calc.AnalyzeResult( r, 2, 3, true, 50, "/Users/olmo/cernbox/PID_timing_studies/_root/results_v1/", Form("_L%.0ffb_%s_M%.0f", Luminosity, TOFtrigger?"TOF":"HT", mass));
 
     for( auto s : sigma_eval ) {
       exp_upper_limit[s].push_back(r->GetExpectedUpperLimit(s));
@@ -484,22 +489,22 @@ map<int, vector<double>> Compute_limit_band(vector<double> masses_scan, double L
   return exp_upper_limit;
 }
 
-void TOFAnalysis_RHad_catCombined(){
+void TOFAnalysis_RHad_catCombined_v1(){
   RooMsgService::instance().setGlobalKillBelow(RooFit::WARNING) ;
 
-  vector<double> masses_scan = {500};
-  // vector<double> masses_scan = {100, 150, 200, 300, 400, 600, 800, 1000, 1200, 1600, 2000, 2500};
+  // vector<double> masses_scan = {500};
+  vector<double> masses_scan = {100, 150, 200, 300, 400, 600, 800, 1000, 1200, 1600, 2000, 2500};
   // vector<double> masses_scan_low = {200};
-  // vector<double> masses_scan_low = {100, 150, 200, 300, 400, 600, 800, 1000};
+  vector<double> masses_scan_low = {100, 150, 200, 300, 400, 600, 800, 1000};
 
   auto exp_upper_limit_now = Compute_limit_band(masses_scan, 12, false);
-  // auto exp_upper_limit_HL = Compute_limit_band(masses_scan, 1e3, false);
+  auto exp_upper_limit_HL = Compute_limit_band(masses_scan, 1e3, false);
 
-  // auto exp_upper_limit_HL_TOFtrigger = Compute_limit_band(masses_scan_low, 1e3, true);
+  auto exp_upper_limit_HL_TOFtrigger = Compute_limit_band(masses_scan_low, 1e3, true);
 
 
-  // auto c_mass = MakeBrazilPlot(masses_scan, exp_upper_limit_now, exp_upper_limit_HL, exp_upper_limit_HL_TOFtrigger);
-  // c_mass->SaveAs("./_fig/ExclusionLimits.root");
-  // c_mass->SaveAs("./_fig/ExclusionLimits.png");
+  auto c_mass = MakeBrazilPlot(masses_scan, exp_upper_limit_now, exp_upper_limit_HL, exp_upper_limit_HL_TOFtrigger);
+  c_mass->SaveAs("./_fig/ExclusionLimits_v1.root");
+  c_mass->SaveAs("./_fig/ExclusionLimits_v1.png");
 
 }

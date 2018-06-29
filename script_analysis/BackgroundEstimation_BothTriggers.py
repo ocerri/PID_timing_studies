@@ -34,7 +34,7 @@ save_dir = '_fig/' + trigger + 'trigger'
 print 'Running with trigger -->', trigger
 
 min_trk_pt = [100., 50.]
-max_dm = 0.25
+max_dm = 0.1
 
 mass_lower_bound = 50
 mass_upper_bound = 600

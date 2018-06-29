@@ -10,7 +10,13 @@ import matplotlib.pyplot as plt
 rt.gErrorIgnoreLevel = 4000
 
 trigger = 'HT'
-# trigger = 'TOF'
+trigger = 'TOF'
+
+if len(sys.argv)>1:
+    trigger = sys.argv[1]
+if not (trigger in ['HT', 'TOF']):
+    print 'Available triggers: HT, TOF'
+    raise
 
 
 cebefo_style()
@@ -30,7 +36,7 @@ print 'Running with trigger -->', trigger
 
 
 min_trk_pt = [100., 50.]
-max_dm = 0.25
+max_dm = 0.1
 
 binning_pt = [50, 30, 800]
 arr = np.concatenate((np.array([-0.5, -0.3]), np.linspace(0.0, 0.6, 20)))
@@ -266,7 +272,7 @@ for i in [1,2]:
         s = ''
         for x in pars[i][:, j]:
             s += '{:.3f}, '.format(x)
-        f_pars.write('{}_{}{}'.format(n, trigger, i) + ' = {' + s[:-2] + '};\n')
+        f_pars.write('double {}_{}{}[]'.format(n, trigger, i) + ' = {' + s[:-2] + '};\n')
     f_pars.write('\n\n'.format(i))
 f_pars.close()
 

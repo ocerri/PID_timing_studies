@@ -1,7 +1,8 @@
-''' version GetBinWidth
+/*
+version with
 min_trk_pt = [100., 50.]
 max_dm = 0.25
-'''
+*/
 #include "TCanvas.h"
 #include "TGraphAsymmErrors.h"
 #include "TLatex.h"
