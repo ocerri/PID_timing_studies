@@ -73,11 +73,13 @@ cd ..
 echo "Installing Delphes 3.4.1"
 #Check that the timing smearing is properly fixed tf_smeared
 if [ ! -d "Delphes-3.4.1" ]; then
-  wget http://cp3.irmp.ucl.ac.be/downloads/Delphes-3.4.1.tar.gz
-  tar xvzf Delphes-3.4.1.tar.gz
-  rm -rf Delphes-3.4.1.tar.gz
+  # wget http://cp3.irmp.ucl.ac.be/downloads/Delphes-3.4.1.tar.gz
+  # tar xvzf Delphes-3.4.1.tar.gz
+  # rm -rf Delphes-3.4.1.tar.gz
+  # cd Delphes-3.4.1
+  git clone https://github.com/ocerri/Delphes.git
+  cd Delphes
 fi
-cd Delphes-3.4.1
 make -j8 HAS_PYTHIA8=true DelphesPythia8
 cd ..
 
